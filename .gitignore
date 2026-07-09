@@ -1,0 +1,6 @@
+# Claude Code project config — không đưa lên GitHub
+.claude/
+
+# OS
+.DS_Store
+Thumbs.db

@@ -1,0 +1,836 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Auth {
+  id: String!
+  email: String!
+  phoneNumber: String!
+  isVerified: Boolean!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+type AuthBody {
+  auth: Auth!
+  accessToken: String!
+}
+
+type RefreshTokenBody {
+  accessToken: String!
+}
+
+type User {
+  id: String!
+  username: String!
+  address: String!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+type Cpu {
+  id: String!
+  name: String!
+  manufacturer: String!
+  cores: Int!
+  threads: Int!
+  frequency: Float!
+  cache: Int!
+  socket: String!
+  tdp: Int!
+  iGPU: String!
+  description: String!
+  imageUrl: String!
+  stock: Int!
+  isActive: Boolean!
+  price: Int!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+type Ram {
+  id: String!
+  name: String!
+  manufacturer: String!
+  memory: Int!
+  bus: Int!
+  standard: String!
+  latency: String!
+  description: String!
+  imageUrl: String!
+  stock: Int!
+  isActive: Boolean!
+  price: Int!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+type Vga {
+  id: String!
+  name: String!
+  manufacturer: String!
+  architecture: String!
+  vMemory: Int!
+  frequency: Int!
+  cores: Int!
+  tgp: Int!
+  port: String!
+  description: String!
+  imageUrl: String!
+  stock: Int!
+  isActive: Boolean!
+  price: Int!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+type Mainboard {
+  id: String!
+  name: String!
+  manufacturer: String!
+  socket: String!
+  chipset: String!
+  formFactor: String!
+  memorySlots: Int!
+  memoryType: String!
+  maxMemory: Int!
+  description: String!
+  imageUrl: String!
+  stock: Int!
+  isActive: Boolean!
+  price: Int!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+type Psu {
+  id: String!
+  name: String!
+  manufacturer: String!
+  wattage: Int!
+  efficiency: String!
+  modular: String!
+  description: String!
+  imageUrl: String!
+  stock: Int!
+  isActive: Boolean!
+  price: Int!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+type Cooler {
+  id: String!
+  name: String!
+  manufacturer: String!
+  type: String!
+  size: Int!
+  fanSpeed: Int!
+  noise: Float!
+  socketSupport: String!
+  description: String!
+  imageUrl: String!
+  stock: Int!
+  isActive: Boolean!
+  price: Int!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+type Case {
+  id: String!
+  name: String!
+  manufacturer: String!
+  formFactor: String!
+  maxGpuLength: Int!
+  maxCoolerHeight: Int!
+  includedFans: Int!
+  description: String!
+  imageUrl: String!
+  stock: Int!
+  isActive: Boolean!
+  price: Int!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+type Ssd {
+  id: String!
+  name: String!
+  manufacturer: String!
+  capacity: Int!
+  type: String!
+  readSpeed: Int!
+  writeSpeed: Int!
+  description: String!
+  imageUrl: String!
+  stock: Int!
+  isActive: Boolean!
+  price: Int!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+type OrderItem {
+  id: String!
+  orderId: String!
+  productType: ProductType!
+  productId: String!
+  productName: String!
+  unitPrice: Float!
+  quantity: Int!
+  subtotal: Float!
+}
+
+enum ProductType {
+  CPU
+  RAM
+  VGA
+  MAINBOARD
+  PSU
+  COOLER
+  CASE
+  SSD
+}
+
+type OrderStatusHistory {
+  id: String!
+  orderId: String!
+  status: OrderStatus!
+  note: String
+  createdAt: DateTime!
+}
+
+enum OrderStatus {
+  PENDING
+  CONFIRMED
+  SHIPPING
+  COMPLETED
+  CANCELLED
+}
+
+type Order {
+  id: String!
+  userId: String!
+  status: OrderStatus!
+  totalPrice: Float!
+  shippingAddress: String!
+  phoneNumber: String!
+  note: String
+  items: [OrderItem!]!
+  statusHistory: [OrderStatusHistory!]!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+type CartItemDetail {
+  id: String!
+  productType: ProductType!
+  productId: String!
+  quantity: Int!
+  productName: String!
+  imageUrl: String!
+  unitPrice: Float!
+  stock: Int!
+  subtotal: Float!
+}
+
+type CartDetail {
+  id: String!
+  items: [CartItemDetail!]!
+  totalPrice: Float!
+  updatedAt: DateTime!
+}
+
+type Review {
+  id: String!
+  productType: ProductType!
+  productId: String!
+  userId: String!
+  rating: Int!
+  comment: String
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+type RatingSummary {
+  average: Float!
+  count: Int!
+}
+
+type OrderStatusCount {
+  status: OrderStatus!
+  count: Int!
+}
+
+type TopProduct {
+  productName: String!
+  productType: ProductType!
+  totalQuantity: Int!
+  totalRevenue: Float!
+}
+
+type DashboardStats {
+  totalRevenue: Float!
+  totalOrders: Int!
+  totalUsers: Int!
+  totalProducts: Int!
+  ordersByStatus: [OrderStatusCount!]!
+  topProducts: [TopProduct!]!
+}
+
+type WishlistItemDetail {
+  id: String!
+  productType: ProductType!
+  productId: String!
+  productName: String!
+  imageUrl: String!
+  price: Float!
+  stock: Int!
+}
+
+type Complaint {
+  id: String!
+  orderId: String!
+  userId: String!
+  subject: String!
+  description: String!
+  status: ComplaintStatus!
+  adminResponse: String
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+enum ComplaintStatus {
+  OPEN
+  IN_PROGRESS
+  RESOLVED
+  REJECTED
+}
+
+type Query {
+  myAccount: Auth!
+  me: User!
+  users: [User!]!
+  getAllCpu: [Cpu!]!
+  getCpuById(id: String!): Cpu!
+  filterCpu(filter: CpuInput!): [Cpu!]!
+  getAllRam: [Ram!]!
+  getRamById(id: String!): Ram!
+  filterRam(filter: RamInput!): [Ram!]!
+  getAllVga: [Vga!]!
+  getVgaById(id: String!): Vga!
+  filterVga(filter: VgaInput!): [Vga!]!
+  getAllMainboard: [Mainboard!]!
+  getMainboardById(id: String!): Mainboard!
+  filterMainboard(filter: MainboardInput!): [Mainboard!]!
+  getAllPsu: [Psu!]!
+  getPsuById(id: String!): Psu!
+  filterPsu(filter: PsuInput!): [Psu!]!
+  getAllCooler: [Cooler!]!
+  getCoolerById(id: String!): Cooler!
+  filterCooler(filter: CoolerInput!): [Cooler!]!
+  getAllCase: [Case!]!
+  getCaseById(id: String!): Case!
+  filterCase(filter: CaseInput!): [Case!]!
+  getAllSsd: [Ssd!]!
+  getSsdById(id: String!): Ssd!
+  filterSsd(filter: SsdInput!): [Ssd!]!
+  myOrders: [Order!]!
+  orders: [Order!]!
+  order(id: String!): Order!
+  myCart: CartDetail!
+  productReviews(productType: ProductType!, productId: String!): [Review!]!
+  productRatingSummary(productType: ProductType!, productId: String!): RatingSummary!
+  myReview(productType: ProductType!, productId: String!): Review
+  adminDashboardStats: DashboardStats!
+  myWishlist: [WishlistItemDetail!]!
+  myComplaints: [Complaint!]!
+  orderComplaints(orderId: String!): [Complaint!]!
+  allComplaints: [Complaint!]!
+}
+
+input CpuInput {
+  minPrice: Int
+  maxPrice: Int
+  name: String
+  socket: String
+  minCore: Int
+  maxCore: Int
+  minFrequency: Float
+  maxFrequency: Float
+  minCache: Int
+  maxCache: Int
+  iGPU: Boolean
+}
+
+input RamInput {
+  minPrice: Int
+  maxPrice: Int
+  name: String
+  standard: String
+  latency: String
+  minBus: Int
+  maxBus: Int
+  minMemory: Int
+  maxMemory: Int
+}
+
+input VgaInput {
+  minPrice: Int
+  maxPrice: Int
+  name: String
+  architecture: String
+  minVMemory: Int
+  maxVMemory: Int
+  minTgp: Int
+  maxTgp: Int
+}
+
+input MainboardInput {
+  minPrice: Int
+  maxPrice: Int
+  name: String
+  socket: String
+  chipset: String
+  formFactor: String
+  memoryType: String
+}
+
+input PsuInput {
+  minPrice: Int
+  maxPrice: Int
+  name: String
+  efficiency: String
+  modular: String
+  minWattage: Int
+  maxWattage: Int
+}
+
+input CoolerInput {
+  minPrice: Int
+  maxPrice: Int
+  name: String
+  type: String
+  socketSupport: String
+  minSize: Int
+  maxSize: Int
+}
+
+input CaseInput {
+  minPrice: Int
+  maxPrice: Int
+  name: String
+  formFactor: String
+  minMaxGpuLength: Int
+  minMaxCoolerHeight: Int
+}
+
+input SsdInput {
+  minPrice: Int
+  maxPrice: Int
+  name: String
+  type: String
+  minCapacity: Int
+  maxCapacity: Int
+  minReadSpeed: Int
+  minWriteSpeed: Int
+}
+
+type Mutation {
+  register(registerAuthInput: RegisterAuthInput!): AuthBody!
+  login(loginAuthInput: LoginAuthInput!): AuthBody!
+  refreshToken: RefreshTokenBody!
+  logout: Boolean!
+  removeAuth: Boolean!
+  forgotPassword(forgotPasswordInput: ForgotPasswordInput!): Boolean!
+  resetPassword(resetPasswordInput: ResetPasswordInput!): Boolean!
+  verifyEmail(verifyEmailInput: VerifyEmailInput!): Boolean!
+  resendVerificationEmail(resendVerificationEmailInput: ResendVerificationEmailInput!): Boolean!
+  updateProfile(input: UpdateProfileInput!): User!
+  changeUsername(input: ChangeUsernameInput!): User!
+  changeAddress(input: ChangeAddressInput!): User!
+  changePhoneNumber(input: ChangePhoneNumberInput!): Auth!
+  changeEmail(input: ChangeEmailInput!): Auth!
+  changePassword(input: ChangePasswordInput!): Boolean!
+  removeUserProfile(id: String!): Boolean!
+  createCpu(input: CreateCpuInput!): Cpu!
+  updateCpu(id: String!, input: UpdateCpuInput!): Cpu!
+  removeCpu(id: String!): Cpu!
+  createRam(input: CreateRamInput!): Ram!
+  updateRam(id: String!, input: UpdateRamInput!): Ram!
+  removeRam(id: String!): Ram!
+  createVga(input: CreateVgaInput!): Vga!
+  updateVga(id: String!, input: UpdateVgaInput!): Vga!
+  removeVga(id: String!): Vga!
+  createMainboard(input: CreateMainboardInput!): Mainboard!
+  updateMainboard(id: String!, input: UpdateMainboardInput!): Mainboard!
+  removeMainboard(id: String!): Mainboard!
+  createPsu(input: CreatePsuInput!): Psu!
+  updatePsu(id: String!, input: UpdatePsuInput!): Psu!
+  removePsu(id: String!): Psu!
+  createCooler(input: CreateCoolerInput!): Cooler!
+  updateCooler(id: String!, input: UpdateCoolerInput!): Cooler!
+  removeCooler(id: String!): Cooler!
+  createCase(input: CreateCaseInput!): Case!
+  updateCase(id: String!, input: UpdateCaseInput!): Case!
+  removeCase(id: String!): Case!
+  createSsd(input: CreateSsdInput!): Ssd!
+  updateSsd(id: String!, input: UpdateSsdInput!): Ssd!
+  removeSsd(id: String!): Ssd!
+  createOrder(input: CreateOrderInput!): Order!
+  updateOrderStatus(input: UpdateOrderStatusInput!): Order!
+  cancelOrder(id: String!): Order!
+  removeOrder(id: String!): Boolean!
+  addToCart(input: AddCartItemInput!): CartDetail!
+  updateCartItemQuantity(input: UpdateCartItemInput!): CartDetail!
+  removeCartItem(itemId: String!): CartDetail!
+  clearCart: CartDetail!
+  checkoutCart(input: CheckoutCartInput!): Order!
+  upsertReview(input: UpsertReviewInput!): Review!
+  deleteReview(id: String!): Boolean!
+  toggleWishlist(input: ToggleWishlistInput!): Boolean!
+  createComplaint(input: CreateComplaintInput!): Complaint!
+  respondComplaint(input: RespondComplaintInput!): Complaint!
+}
+
+input RegisterAuthInput {
+  email: String!
+  password: String!
+  phoneNumber: String!
+}
+
+input LoginAuthInput {
+  email: String!
+  password: String!
+}
+
+input ForgotPasswordInput {
+  email: String!
+}
+
+input ResetPasswordInput {
+  token: String!
+  newPassword: String!
+}
+
+input VerifyEmailInput {
+  token: String!
+}
+
+input ResendVerificationEmailInput {
+  email: String!
+}
+
+input UpdateProfileInput {
+  username: String
+  address: String
+}
+
+input ChangeUsernameInput {
+  newUsername: String!
+}
+
+input ChangeAddressInput {
+  newAddress: String!
+}
+
+input ChangePhoneNumberInput {
+  newPhoneNumber: String!
+}
+
+input ChangeEmailInput {
+  newEmail: String!
+}
+
+input ChangePasswordInput {
+  oldPassword: String!
+  newPassword: String!
+}
+
+input CreateCpuInput {
+  name: String!
+  manufacturer: String!
+  cores: Int!
+  threads: Int!
+  frequency: Float!
+  cache: Int!
+  socket: String!
+  tdp: Int!
+  iGPU: String!
+  description: String!
+  imageUrl: String!
+  stock: Int!
+  price: Int!
+}
+
+input UpdateCpuInput {
+  name: String
+  manufacturer: String
+  cores: Int
+  threads: Int
+  frequency: Float
+  cache: Int
+  socket: String
+  tdp: Int
+  iGPU: String
+  description: String
+  imageUrl: String
+  stock: Int
+  price: Int
+}
+
+input CreateRamInput {
+  name: String!
+  manufacturer: String!
+  memory: Int!
+  bus: Int!
+  standard: String!
+  latency: String!
+  description: String!
+  imageUrl: String!
+  stock: Int!
+  price: Int!
+}
+
+input UpdateRamInput {
+  name: String
+  manufacturer: String
+  memory: Int
+  bus: Int
+  standard: String
+  latency: String
+  description: String
+  imageUrl: String
+  stock: Int
+  price: Int
+}
+
+input CreateVgaInput {
+  name: String!
+  manufacturer: String!
+  architecture: String!
+  vMemory: Int!
+  frequency: Int!
+  cores: Int!
+  tgp: Int!
+  port: String!
+  description: String!
+  imageUrl: String!
+  stock: Int!
+  price: Int!
+}
+
+input UpdateVgaInput {
+  name: String
+  manufacturer: String
+  architecture: String
+  vMemory: Int
+  frequency: Int
+  cores: Int
+  tgp: Int
+  port: String
+  description: String
+  imageUrl: String
+  stock: Int
+  price: Int
+}
+
+input CreateMainboardInput {
+  name: String!
+  manufacturer: String!
+  socket: String!
+  chipset: String!
+  formFactor: String!
+  memorySlots: Int!
+  memoryType: String!
+  maxMemory: Int!
+  description: String!
+  imageUrl: String!
+  stock: Int!
+  price: Int!
+}
+
+input UpdateMainboardInput {
+  name: String
+  manufacturer: String
+  socket: String
+  chipset: String
+  formFactor: String
+  memorySlots: Int
+  memoryType: String
+  maxMemory: Int
+  description: String
+  imageUrl: String
+  stock: Int
+  price: Int
+}
+
+input CreatePsuInput {
+  name: String!
+  manufacturer: String!
+  wattage: Int!
+  efficiency: String!
+  modular: String!
+  description: String!
+  imageUrl: String!
+  stock: Int!
+  price: Int!
+}
+
+input UpdatePsuInput {
+  name: String
+  manufacturer: String
+  wattage: Int
+  efficiency: String
+  modular: String
+  description: String
+  imageUrl: String
+  stock: Int
+  price: Int
+}
+
+input CreateCoolerInput {
+  name: String!
+  manufacturer: String!
+  type: String!
+  size: Int!
+  fanSpeed: Int!
+  noise: Float!
+  socketSupport: String!
+  description: String!
+  imageUrl: String!
+  stock: Int!
+  price: Int!
+}
+
+input UpdateCoolerInput {
+  name: String
+  manufacturer: String
+  type: String
+  size: Int
+  fanSpeed: Int
+  noise: Float
+  socketSupport: String
+  description: String
+  imageUrl: String
+  stock: Int
+  price: Int
+}
+
+input CreateCaseInput {
+  name: String!
+  manufacturer: String!
+  formFactor: String!
+  maxGpuLength: Int!
+  maxCoolerHeight: Int!
+  includedFans: Int!
+  description: String!
+  imageUrl: String!
+  stock: Int!
+  price: Int!
+}
+
+input UpdateCaseInput {
+  name: String
+  manufacturer: String
+  formFactor: String
+  maxGpuLength: Int
+  maxCoolerHeight: Int
+  includedFans: Int
+  description: String
+  imageUrl: String
+  stock: Int
+  price: Int
+}
+
+input CreateSsdInput {
+  name: String!
+  manufacturer: String!
+  capacity: Int!
+  type: String!
+  readSpeed: Int!
+  writeSpeed: Int!
+  description: String!
+  imageUrl: String!
+  stock: Int!
+  price: Int!
+}
+
+input UpdateSsdInput {
+  name: String
+  manufacturer: String
+  capacity: Int
+  type: String
+  readSpeed: Int
+  writeSpeed: Int
+  description: String
+  imageUrl: String
+  stock: Int
+  price: Int
+}
+
+input CreateOrderInput {
+  shippingAddress: String!
+  phoneNumber: String!
+  note: String
+  items: [CreateOrderItemInput!]!
+}
+
+input CreateOrderItemInput {
+  productType: ProductType!
+  productId: String!
+  quantity: Int!
+}
+
+input UpdateOrderStatusInput {
+  id: String!
+  status: OrderStatus!
+  note: String
+}
+
+input AddCartItemInput {
+  productType: ProductType!
+  productId: String!
+  quantity: Int! = 1
+}
+
+input UpdateCartItemInput {
+  itemId: String!
+  quantity: Int!
+}
+
+input CheckoutCartInput {
+  shippingAddress: String!
+  phoneNumber: String!
+  note: String
+}
+
+input UpsertReviewInput {
+  productType: ProductType!
+  productId: String!
+  rating: Int!
+  comment: String
+}
+
+input ToggleWishlistInput {
+  productType: ProductType!
+  productId: String!
+}
+
+input CreateComplaintInput {
+  orderId: String!
+  subject: String!
+  description: String!
+}
+
+input RespondComplaintInput {
+  id: String!
+  status: ComplaintStatus!
+  adminResponse: String
+}
